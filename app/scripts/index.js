@@ -1,13 +1,7 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+var $ = require('jquery');
+var Backbone = require('backbone');
+require('./router');
 
-var ChatAppContainer = require('./components/chat.jsx').ChatAppContainer;
-
-ReactDOM.render(
-  React.createElement(ChatAppContainer),
-  document.getElementById('app')
-);
-
-module.exports = {
-  ChatAppContainer
-}
+$(function(){
+  Backbone.history.start();
+});
