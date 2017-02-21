@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <title>7 3 react chat app</title>
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body>
+
+    <header class="well login-nav">
+      <button type="button" class="btn btn-default login-btn" aria-label="Right Align">
+        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true">Login</span>
+      </button>
+    </header>
+
+      <div class="container">
+        <div class="row">
+          <div class="login-form-container col-md-6 pull-right">
+            <form class="login-form" action="index.html" method="post">
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input id="username" class="form-control" type="text" value="" placeholder="username" />
+              </div>
+                <div class="form-group">
+                  <label for="Password">Password</label>
+                  <input id="password" class="form-control" type="text" value="" placeholder="password" />
+                </div>
+                  <div class="create-account">
+                    <a href="#">Create Account</a>
+                  </div>
+            </form>
+            <input type="submit" name="" value="login">
+          </div>
+        </div>
+      </div>
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="chat-container">
+              <div class="chat-stamp">
+                <span class="user">username</span>
+                <span class="current-time">current time</span>
+              </div>
+                <div class="chat-content">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+            </div>
+          </div>
+            <div class="col-md-6">
+              <form class="chat-form" action="index.html" method="post">
+                <h2>Type Your Message</h2>
+                <div class="form-group">
+                  <label for="message">Chat</label>
+                  <textarea id="message" class="form-control" type="text" name="" value="" placeholder="type message here.."></textarea>
+                </div>
+                  <input type="submit" name="" value="chat">
+              </form>
+
+            </div>
+        </div>
+      </div>
+
+    <script src="js/bundle.js"></script>
+  </body>
+</html>
