@@ -3,6 +3,21 @@ var React = require('react');
 var models = require('../models/chat');
 
 var ChatAppContainer = React.createClass({
+  getInitialState: function(){
+    var messageCollection = new models.MessageCollection();
+    var self = this;
+    messageCollection.fetch().done(function(){
+      self.setState({messageCollection: messageCollection});
+    });
+    return {
+      messageList: messageCollection
+    };
+  },
+  addMessage: function(message){
+    var messageList = this.state.messageList;
+    messageList.create(message);
+    this.setState({messageList: messageList});
+  },
   render: function(){
 
     return (
@@ -25,13 +40,13 @@ var ChatAppContainer = React.createClass({
             <div className="row">
               <div className="col-md-6">
 
-                <ChatList />
+                <ChatList messageList={this.state.messageList} />
 
               </div>
 
               <div className="col-md-6">
 
-                <ChatForm />
+                <ChatForm addMessage={this.addMessage} />
 
               </div>
             </div>
@@ -63,14 +78,23 @@ var LoginForm = React.createClass({
 });
 
 var ChatForm = React.createClass({
+  handleMessageChange: function(event){
+    this.setState({message: event.target.value});
+  },
+  addMessage: function(event){
+    event.preventDefault();
+
+    this.props.addMessage(this.state);
+    this.setState({message: ''});
+  },
   render: function(){
 
     return (
-      <form className="chat-form" action="index.html" method="post">
+      <form onSubmit={this.addMessage} className="chat-form">
         <h2>Type Your Message</h2>
         <div className="form-group">
-          <label htmlFor="message">Chat</label>
-          <textarea id="message" className="form-control" type="text" name="" value="" placeholder="type message here.."></textarea>
+          <label htmlFor="message">Message</label>
+          <textarea onChange={this.handleMessageChange} id="message" className="form-control" type="text" placeholder="type message here.."></textarea>
         </div>
           <input type="submit" name="" value="chat" />
       </form>
@@ -80,20 +104,25 @@ var ChatForm = React.createClass({
 
 var ChatList = React.createClass({
   render: function(){
+    var messageItems = this.props.messageList.map(function(message){
 
+      return (
+          <li key={message.cid}>
+            <div className="chat-container">
+              <div className="chat-stamp">
+                <span className="user"></span>
+                <span className="current-time">time stamp</span>
+              </div>
+                <div className="chat-content">
+                  {message.get('message')}
+                </div>
+            </div>
+          </li>
+      );
+    });
     return (
       <ul>
-        <li>
-          <div className="chat-container">
-            <div className="chat-stamp">
-              <span className="user">username</span>
-              <span className="current-time">time stamp</span>
-            </div>
-              <div className="chat-content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-              </div>
-          </div>
-        </li>
+      {messageItems}
       </ul>
     )
   }
