@@ -16,8 +16,24 @@ img {
   max-width: 100%;
 }
 
+.container{
+  background-color: #1E1758;
+}
+
 #app{
   background-color: #E3E3E3;
+}
+
+header{
+  span{
+    float: left;
+  }
+  .current-user{
+    font-size: 16px;
+    color: #90E67F;
+    padding-left: 5px;
+    margin-bottom: 5px;
+  }
 }
 
 .login-btn{
@@ -45,7 +61,7 @@ img {
   padding-bottom: 10px;
 
   label{
-    color: #6FEF75;
+    color: #FFF;
   }
 
   input{
@@ -70,6 +86,7 @@ li{
 }
 
 .chat-container{
+  background-color: #E3E3E3;
   border: 1px solid black;
   padding: 15px;
   margin-bottom: 20px;
@@ -81,8 +98,9 @@ li{
   padding: 5px;
 
   .user{
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
+    padding-right: 10px;
   }
 
   .current-time{
@@ -101,13 +119,24 @@ li{
 }
 
 .chat-form{
-  border: 1px solid black;
-  padding-bottom: 10px;
+  color: #FFF;
+  border: 1px solid #FFF;
+  background-color: black;
+  padding: 10px;
 
   h2{
     font-size: 20px;
     border-bottom: 1px solid black;
+    margin-top: 0;
     padding-bottom: 10px;
     padding-left: 10px;
+  }
+
+  textarea{
+    background-color: #E3E3E3;
+  }
+
+  input{
+    color: black;
   }
 }

@@ -13,11 +13,15 @@ var ChatAppContainer = React.createClass({
 
     messageCollection.fetch().done(function(){
       self.setState({messageCollection: messageCollection});
+
     });
     return {
-      messageList: messageCollection
+      messageList: messageCollection,
+      username: this.props.router.username,
+      showForm: false
     };
   },
+
   getMessage: function(){
     var self = this;
 
@@ -25,17 +29,35 @@ var ChatAppContainer = React.createClass({
       self.setState({messageCollection: messageCollection});
     });
   },
+
   addMessage: function(message){
     var messageList = this.state.messageList;
+
+    messageList.username = this.state.username;
     messageList.create(message);
     this.setState({messageList: messageList});
   },
+
+  addUser: function(user){
+    var router = this.props.router;
+    router.username = user.username;
+    localStorage.setItem('username', user.username);
+  },
+
+  handleFormToggle: function(event){
+    event.preventDefault();
+
+    var showForm = !this.state.showForm;
+    this.setState({showForm: showForm});
+  },
+
   render: function(){
 
     return (
       <div className="container">
         <header className="well login-nav">
-          <button type="button" className="btn btn-default login-btn" aria-label="Right Align">
+          <span>welcome to the chat room</span> <span className="current-user">{this.state.username}</span>
+          <button onClick={this.handleFormToggle} type="button" className="btn btn-default login-btn" aria-label="Right Align">
             <span className="glyphicon glyphicon-plus-sign" aria-hidden="true">Login</span>
           </button>
         </header>
@@ -43,7 +65,7 @@ var ChatAppContainer = React.createClass({
           <div className="row">
             <div className="login-form-container col-md-6 pull-right">
 
-              <LoginForm />
+              <LoginForm addUser={this.addUser} handleFormToggle={this.handleFormToggle}/>
 
             </div>
           </div>
@@ -68,13 +90,28 @@ var ChatAppContainer = React.createClass({
 });
 
 var LoginForm = React.createClass({
+  handleUser: function(event){
+    this.setState({username: event.target.value});
+  },
+
+  addUser: function(event){
+    event.preventDefault();
+    this.props.addUser(this.state);
+    this.setState({username: ''});
+  },
+
+  handleFormToggle: function(event){
+    event.preventDefault();
+    this.setState({showForm: false})
+  },
+
   render: function(){
 
     return (
-      <form className="login-form" action="index.html" method="post">
+      <form onSubmit={this.addUser} className="login-form">
         <div className="form-group">
           <label htmlFor="username">Username</label>
-          <input id="username" className="form-control" type="text" value="" placeholder="username" />
+          <input onChange={this.handleUser}  id="username" className="form-control" type="text" placeholder="username" />
         </div>
           <div className="form-group">
             <label htmlFor="Password">Password</label>
@@ -93,12 +130,14 @@ var ChatForm = React.createClass({
   handleMessageChange: function(event){
     this.setState({message: event.target.value});
   },
+
   addMessage: function(event){
     event.preventDefault();
 
     this.props.addMessage(this.state);
     this.setState({message: ''});
   },
+
   render: function(){
 
     return (
@@ -108,7 +147,7 @@ var ChatForm = React.createClass({
           <label htmlFor="message">Message</label>
           <textarea onChange={this.handleMessageChange} id="message" className="form-control" type="text" placeholder="type message here.."></textarea>
         </div>
-          <input type="submit" name="" value="chat" />
+          <input type="submit" value="chat" />
       </form>
     )
   }
@@ -122,7 +161,7 @@ var ChatList = React.createClass({
           <li key={message.cid}>
             <div className="chat-container">
               <div className="chat-stamp">
-                <span className="user"></span>
+                <span className="user">{message.get('username')}</span>
                 <span className="current-time">{message.get('timestamp')}</span>
               </div>
                 <div className="chat-content">

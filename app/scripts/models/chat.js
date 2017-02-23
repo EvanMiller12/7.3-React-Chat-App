@@ -3,9 +3,9 @@ var moment = require('moment');
 
 var Message = Backbone.Model.extend({
   idAttribute: '_id',
-  defaults: {
-    username: localStorage.getItem('username')
-  },
+  // defaults: {
+  //   username: ''
+  // },
   initialize: function(){
     this.isNew() ? this.set('timestamp', moment().format('LTS')) : this.set('timestamp', this.get('timestamp'));
   }

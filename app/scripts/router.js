@@ -9,10 +9,12 @@ var AppRouter = Backbone.Router.extend({
   routes: {
     '': 'index'
   },
-  
+  initialize: function(){
+    this.username = localStorage.getItem('username');
+  },
   index: function(){
     ReactDOM.render(
-      React.createElement(ChatAppContainer),
+      React.createElement(ChatAppContainer, {router: this}),
       document.getElementById('app')
     );
   },
