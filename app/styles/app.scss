@@ -16,15 +16,49 @@ img {
   max-width: 100%;
 }
 
+#app{
+  background-color: #E3E3E3;
+}
+
+.login-btn{
+  background-color: #6FEF75;
+
+  .glyphicon-plus-sign{
+    padding-right: 5px;
+  }
+}
+
 .login-nav{
+  background-color: black;
+  color: white;
   text-align: right;
+  margin-bottom: 0;
 }
 
 .login-form-container{
+  background-color: black;
+  color: #E3E3E3;
   border: 1px solid #E3E3E3;
+  margin-top: 0px;
   margin-bottom: 20px;
   margin-right: 20px;
   padding-bottom: 10px;
+
+  label{
+    color: #6FEF75;
+  }
+
+  input{
+    color: black;
+  }
+}
+
+#username{
+  background-color: #E3E3E3;
+}
+
+#password{
+  background-color: #E3E3E3;
 }
 
 .create-account{
@@ -37,7 +71,8 @@ li{
 
 .chat-container{
   border: 1px solid black;
-  padding: 5px;
+  padding: 15px;
+  margin-bottom: 20px;
 }
 
 .chat-stamp{

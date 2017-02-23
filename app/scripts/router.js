@@ -9,6 +9,7 @@ var AppRouter = Backbone.Router.extend({
   routes: {
     '': 'index'
   },
+  
   index: function(){
     ReactDOM.render(
       React.createElement(ChatAppContainer),

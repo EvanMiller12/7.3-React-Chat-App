@@ -2,16 +2,28 @@ var React = require('react');
 
 var models = require('../models/chat');
 
+var messageCollection = new models.MessageCollection();
+
 var ChatAppContainer = React.createClass({
+  componentWillMount: function(){
+    window.setInterval(this.getMessage, 2000);
+  },
   getInitialState: function(){
-    var messageCollection = new models.MessageCollection();
     var self = this;
+
     messageCollection.fetch().done(function(){
       self.setState({messageCollection: messageCollection});
     });
     return {
       messageList: messageCollection
     };
+  },
+  getMessage: function(){
+    var self = this;
+
+    messageCollection.fetch().done(function(){
+      self.setState({messageCollection: messageCollection});
+    });
   },
   addMessage: function(message){
     var messageList = this.state.messageList;
@@ -111,7 +123,7 @@ var ChatList = React.createClass({
             <div className="chat-container">
               <div className="chat-stamp">
                 <span className="user"></span>
-                <span className="current-time">time stamp</span>
+                <span className="current-time">{message.get('timestamp')}</span>
               </div>
                 <div className="chat-content">
                   {message.get('message')}
