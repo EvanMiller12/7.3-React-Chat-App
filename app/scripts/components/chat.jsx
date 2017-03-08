@@ -13,7 +13,6 @@ var ChatAppContainer = React.createClass({
 
     messageCollection.fetch().done(function(){
       self.setState({messageCollection: messageCollection});
-
     });
     return {
       messageList: messageCollection,
@@ -180,5 +179,5 @@ var ChatList = React.createClass({
 });
 
 module.exports = {
-  ChatAppContainer
+  ChatAppContainer: ChatAppContainer
 }

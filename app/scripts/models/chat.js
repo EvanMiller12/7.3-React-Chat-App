@@ -18,6 +18,6 @@ var MessageCollection = Backbone.Collection.extend({
 });
 
 module.exports = {
-  Message,
-  MessageCollection
+  Message: Message,
+  MessageCollection: MessageCollection
 }
